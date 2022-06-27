@@ -12,10 +12,10 @@
   <body>
     <%= render 'layouts/navbar' %>
     
-    <div id="page-content" class="bg-secondary">
+    <div id="page-content">
       <%= render 'layouts/messages' %>
       <%= yield %>
-    </div>
+   
     
     <footer id="sticky-footer" class="py-4 bg-dark text-white mt-auto">
       <div class="container text-center">
@@ -25,6 +25,6 @@
         </small>
       </div>
     </footer>
-    
+     </div>
   </body>
 </html>
