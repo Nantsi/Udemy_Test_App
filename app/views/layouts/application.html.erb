@@ -10,7 +10,21 @@
   </head>
 
   <body>
-    <%= render 'layouts/messages' %>
-    <%= yield %>
+    <%= render 'layouts/navbar' %>
+    
+    <div id="page-content" class="bg-secondary">
+      <%= render 'layouts/messages' %>
+      <%= yield %>
+    </div>
+    
+    <footer id="sticky-footer" class="py-4 bg-dark text-white mt-auto">
+      <div class="container text-center">
+        <small>
+        <%= link_to 'To all articles', articles_path %> |
+        <%= link_to 'About', about_path %>
+        </small>
+      </div>
+    </footer>
+    
   </body>
 </html>
