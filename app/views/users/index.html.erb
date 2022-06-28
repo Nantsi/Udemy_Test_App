@@ -1,0 +1,46 @@
+<div id="page-content" class="d-flex flex-column min-vh-100">
+
+
+<h1 class="text-center pt-2"> All users </h1>
+
+<div class="container">
+  <% @users.each do |user| %>
+    <div class="row justify-content-md-center">
+      <div class="col-8 mt-4">
+        <div class="card text-center shadow mb-5 bg-white rounded">
+          <div class="card-header font-italic">
+            <%= link_to user.username, user %>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">
+                <%= link_to gravatar_for(user, size: 175), user %>
+            </h5>
+            <p class="card-text"><%= pluralize(user.articles.count, "article") %></p>
+            <%= link_to "View", user, class: "btn btn-success" %>
+            <% if logged_in? and user == current_user %>
+              <%= link_to "Edit", edit_user_path(user), class: "btn btn-info" %>
+            <% end %>
+            <% if current_user.admin? %>
+              <%= link_to "Delete", user_path(user), class: "btn btn-danger", method: :delete, 
+              data: {confirm: "Are you sure"}%>
+            <% end %>
+            
+          </div>
+          <div class="card-footer text-muted">
+            <small>Created <%= time_ago_in_words(user.created_at) %> ago </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div> 
+
+
+<div class="apple_pagination">
+    <div class="page_info">
+      <%= page_entries_info @users %>
+    </div>
+    <%= will_paginate @users, :container => false %>
+  </div>
+
+</div>
