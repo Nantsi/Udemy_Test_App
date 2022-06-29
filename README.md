@@ -1,24 +1,4 @@
-# README
+# Udemy practise app
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is my blog app for practise using a Ruby on Rails course from Udemy.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
