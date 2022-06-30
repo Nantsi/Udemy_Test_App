@@ -1,0 +1,56 @@
+<div id="page-content" class="d-flex flex-column min-vh-100">
+
+
+<h1 class="text-center pt-2"> <%= @category.name %> </h1>
+
+<% if current_user.admin? %>
+  <div class="row justify-content-center">
+  <%= link_to "Edit category name", edit_category_path(@category), class: "btn btn-info mb-2 mr-2" %>
+  </div>
+<% end %>
+
+<div class="container">
+  <% @articles.each do |article| %>
+    <% if article.categories.ids.include?(@category.id) %>
+      <div class="row justify-content-md-center">
+        <div class="col-8 mt-4">
+          <div class="card text-center shadow mb-5 bg-white rounded">
+            <div class="card-header font-italic">
+             
+              <% if article.user %>
+                by <%= link_to article.user.username, user_path(article.user) %>
+              <% end %>
+              
+              <% if article.categories.any? %>
+                  <div> <%= render article.categories %> </div>
+              <% end %>
+              
+            </div>
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to article.title, article_path(article), class: "text-success" %></h5>
+              <p class="card-text"><%= truncate(article.description, length: 100) %></p>
+              <%= link_to "View", article_path(article), class: "btn btn-success" %>
+              <% if logged_in? && (article.user == current_user || current_user.admin?) %>
+                <%= link_to "Edit", edit_article_path(article), class: "btn btn-info" %>
+                <%= link_to "Delete", article_path(article), class: "btn btn-danger", method: :delete, data: {confirm: "Are you sure?"} %>
+              <% end %>
+            </div>
+            <div class="card-footer text-muted">
+              <small>Created <%= time_ago_in_words(article.created_at) %> ago, 
+              edited <%= time_ago_in_words(article.updated_at) %> ago</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div> 
+
+<div class="apple_pagination">
+    <div class="page_info">
+      <%= page_entries_info @articles %>
+    </div>
+    <%= will_paginate @articles, :container => false %>
+  </div>
+  
+</div>

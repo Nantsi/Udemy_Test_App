@@ -9,13 +9,18 @@
                   by <%= @article.user.username %> 
                   <p></p>
                   <%= link_to gravatar_for(@article.user, size: 100), user_path(@article.user) %>
+                  
+                  <% if @article.categories.any? %>
+                    <%= render @article.categories %>
+                  <% end %>
+                  
                 </h5>
               </div>
               <div class="card-body">
                 <div class="card-text text-left"><%= simple_format(@article.description) %></div>
                   <% if logged_in? && (@article.user == current_user || current_user.admin?) %>
-                    <a href=<%= edit_article_path(@article) %> class="btn btn-warning">Edit Article</a>
-                    <%= link_to "Delete", article_path(@article), class: "btn btn-danger", method: :delete, data: {confirm: "Are you sure?"} %>
+                    <a href=<%= edit_article_path(@article) %> class="btn btn-warning shadow">Edit Article</a>
+                    <%= link_to "Delete", article_path(@article), class: "btn btn-danger shadow", method: :delete, data: {confirm: "Are you sure?"} %>
                   <% end %>
                 </div>
               <div class ="card-footer"> 

@@ -4,7 +4,7 @@
 
 <%= form_with(model: @article, class:"card shadow pt-4 pr-4 mb-5 bg-secondary rounded", local: true) do |f| %>
     <div class="form-group row">
-        <%= f.label :Title, class: "col-2 col-form-label" %> 
+        <%= f.label :title, class: "col-2 col-form-label" %> 
         <div class="col-10">
         <%= f.text_field :title, class: "form-control shadow rounded" %>
         </div>
@@ -16,10 +16,18 @@
         <%= f.text_area :description, rows: 5, class: "form-control shadow rounded" %>
         </div>
     </div>  
+    
+    <div class="form-group row">
+        <%= f.label :categories, class: "col-2 col-form-label" %> 
+        <div class="col-10">
+          <%= f.collection_select(:category_ids, Category.all, :id, :name, 
+          { prompt: "(No categories)"}, { multiple: true, size: 5, class: "custom-select shadow rounded" }) %>
+        </div>
+    </div>  
 
-<div class="form-group row justify-content-center">
-    <%= f.submit class: "btn btn-primary" %>
-</div>
+  <div class="form-group row justify-content-center">
+      <%= f.submit class: "btn btn-primary" %>
+  </div>
 
 
 <% end %>

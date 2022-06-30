@@ -1,4 +1,4 @@
- <nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <%= link_to "Test App", root_path, class: "navbar-brand", id: "logo" %>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,7 +11,12 @@
             <%= link_to "Users", users_path, class: "nav-link active" %>
         </li>
         
-        <li class="nav-item">
+        <li class="nav-item dropdown text-dark">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+          Articles
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+          <li class="nav-item">
           <%= link_to 'Articles', articles_path, class: "nav-link" %>
         </li>
         
@@ -20,6 +25,27 @@
           <%= link_to 'Create article', new_article_path, class: "nav-link" %>
           </li>
         <% end %>
+        </ul>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+          Categories
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+          <li class="nav-item">
+              <%= link_to  "Categories", categories_path, class: "nav-link" %> 
+          </li>
+          
+          <% if current_user.admin? %>
+            <li class="nav-item">
+              <%= link_to  "Add category", new_category_path, class: "nav-link" %> 
+            <% end %>
+          </li>
+        </ul>
+      </li>
+      
+        
         
          <% if logged_in? %>
            <% if !current_user.admin? %>
@@ -29,7 +55,9 @@
             <% else %>
               <%= link_to current_user.username + " (admin)", user_path(current_user), class: "nav-link" %>
           <% end %>
-          </li>
+          
+          
+          
         <li class="nav-item">
           <%= link_to 'Logout', logout_path, class: "nav-link", method: :delete %>
         </li>
